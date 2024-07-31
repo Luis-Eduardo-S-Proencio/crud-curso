@@ -1,5 +1,5 @@
 const prompt = require("prompt-sync")();
-const { criar, listar, atualizar, remover } = require("./curso.js");
+const { criar, listar, atualizar, remover } = require("./curso.js");//puxa o curso do app
 
 while (true) {
   console.log(`
@@ -11,7 +11,7 @@ while (true) {
     `);
   const opcao = prompt();
 
-  switch (opcao) {
+  switch (opcao) { //usuario vai escolher o que ele quer
     case "1":
       criar();
       break;

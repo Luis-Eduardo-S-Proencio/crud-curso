@@ -2,7 +2,7 @@ const prompt = require("prompt-sync")();
 
 const cursos = [];
 
-const modelo = () => {
+const modelo = () => { //Onde sera armazenado os valores
   const nome = prompt("Digite o nome do curso: ");
   const duracao = prompt("Digite a duração do curso: ");
 
@@ -58,7 +58,7 @@ const modelo = () => {
   console.log("Dados inválidos!");
 };
 
-const criar = () => {
+const criar = () => { // Cria
   const novo = modelo();
 
   if (novo) {
@@ -67,7 +67,7 @@ const criar = () => {
   }
 };
 
-const listar = () => {
+const listar = () => { //Lista
   if (cursos.length == 0) {
     console.log("Nenhum curso foi criado ainda!");
   }
@@ -81,8 +81,8 @@ const listar = () => {
   });
 };
 
-const atualizar = () => {
-  listar();
+const atualizar = () => { //Atualiza
+  listar(); 
 
   const indice = prompt("Qual o indice que deseja atualizar") - 1;
 
@@ -96,7 +96,7 @@ const atualizar = () => {
   }
 };
 
-const remover = () => {
+const remover = () => { //Remove
   listar();
 
   const indice = prompt("Qual indice deseja remover?") - 1;
