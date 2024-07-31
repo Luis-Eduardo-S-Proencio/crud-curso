@@ -1,112 +1,117 @@
-const prompt = require(prompt-sync)();
+const prompt = require("prompt-sync")();
+
 const cursos = [];
 
-const modelo = () =>{ //Criar
-    const nome = prompt("Digite o nome do curso: ");
-    const duracao = prompt("Digite a duração do curso: ");
+const modelo = () => {
+  const nome = prompt("Digite o nome do curso: ");
+  const duracao = prompt("Digite a duração do curso: ");
 
-    const professores = [];
-    while(true){
-        const professor = prompt("Qual nome do professor ou digite 'fim' para  sair: ")
+  const professores = [];
+  while (true) {
+    const professor = prompt("Digite o nome do professor, ou digite 'fim': ");
 
-        if(professor == "fim"){
-            break;
-        }
-        professores.push(professor);
+    if (professor == "fim") {
+      break;
     }
 
-    const alunos = [];
-    while(true){
-        const alunos = prompt("Qual nome do aluno(a) ou digite 'fim' para  sair: ")
+    professores.push(professor);
+  }
 
-        if(alunos == "fim"){
-            break;
-        }
-        alunos.push(aluno);
+  const alunos = [];
+  while (true) {
+    const aluno = prompt("Digite o nome do aluno, ou digite 'fim': ");
+
+    if (aluno == "fim") {
+      break;
     }
 
-    const materias = [];
-    while(true){
-        const materia = prompt("Qual nome do aluno(a) ou digite 'fim' para  sair: ")
+    alunos.push(aluno);
+  }
 
-        if(materia == "fim"){
-            break;
-        }
-        materias.push(materia);
+  const materias = [];
+  while (true) {
+    const materia = prompt("Digite o nome do materia, ou digite 'fim': ");
+
+    if (materia == "fim") {
+      break;
     }
 
-    if(
-        nome != "" &&
-        duracao > 0 &&
-        professores.length > 0 &&
-        alunos.length > 0 &&
-        materias.lenght > 0
-    ){
-        return{
-            nome,
-            duracao,
-            professores,
-            alunos,
-            materias
-        }
-    }
-    console.log("dados inválido")
-    return
-}
+    materias.push(materia);
+  }
 
-const criar = () =>{
-    const novo = modelo ()
-    
-    if(novo) {
-        cursos.push(novo)
-        console.log("Curso criado com sucesso")
-    }
-}
+  if (
+    nome != "" &&
+    duracao > 0 &&
+    professores.length > 0 &&
+    alunos.length > 0 &&
+    materias.length > 0
+  ) {
+    return {
+      nome,
+      duracao,
+      professores,
+      alunos,
+      materias,
+    };
+  }
 
-const listar = () => { //Listar
-    if(cursos.length == 0){
-        console.log("Nenhum curso foi criado ainda!")
-    }
-
-    cursos.forEach((el, i) => {
-        console.log(`${i + 1},
-        nome: ${el,nome},
-        duracao: ${el, duracao},
-        professores: ${el,professores},
-        alunos: ${el,alunos},
-        materias: ${el, materias}`);
-    })
-}
-
-const atualizar = () =>{ //Atualizar
-    listar()
-    const indice = prompt("Qual o indice que deseja atualizar?: ")
-    
-    const novo = modelo();
-
-    if(novo && indice >= 0 && indice < cursos.length){
-        cursos[indice] = novo;
-        console.log("Curso atualizado com sucesso!")
-    } else {
-        console.log("Indice inválido")
-    }
+  console.log("Dados inválidos!");
 };
 
-const remover = () =>{ //Remover
-    listar()
+const criar = () => {
+  const novo = modelo();
 
-    const indice = prompt("Qual indice deseja remover?: ")
-    if(indice > 0 && indice < cursos.length){
-        cursos.splice(indice, 1)
-        console.log("Registro removido com sucesso!")
-    }else{
-        console.log("Indice invalido")
-    }
-}
+  if (novo) {
+    cursos.push(novo);
+    console.log("Curso criado com sucesso!");
+  }
+};
+
+const listar = () => {
+  if (cursos.length == 0) {
+    console.log("Nenhum curso foi criado ainda!");
+  }
+  cursos.forEach((el, i) => {
+    console.log(`${i + 1}. 
+            Nome: ${el.nome},
+            Duração: ${el.duracao},
+            Professores: ${el.professores},
+            Alunos: ${el.alunos},
+            Materias: ${el.materias}`);
+  });
+};
+
+const atualizar = () => {
+  listar();
+
+  const indice = prompt("Qual o indice que deseja atualizar") - 1;
+
+  const novo = modelo();
+
+  if (novo && indice >= 0 && indice < cursos.length) {
+    cursos[indice] = novo;
+    console.log("Curso atualizado com sucesso!");
+  } else {
+    console.log("Indice inválido");
+  }
+};
+
+const remover = () => {
+  listar();
+
+  const indice = prompt("Qual indice deseja remover?") - 1;
+
+  if (indice >= 0 && indice < cursos.length) {
+    cursos.splice(indice, 1);
+    console.log("Registro removido com sucesso!");
+  } else {
+    console.log("Indice inválido");
+  }
+};
 
 module.exports = {
-    criar,
-    atualizar,
-    remover,
-    listar
-}
+  criar,
+  atualizar,
+  remover,
+  listar,
+};
